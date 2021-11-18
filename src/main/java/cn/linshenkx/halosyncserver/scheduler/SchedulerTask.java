@@ -27,8 +27,9 @@ public class SchedulerTask {
     public void checkJobStatus() {
         try {
             syncManager.syncNewCommitPost();
+            log.info("同步成功");
         } catch (Exception e) {
-            log.error(e.getMessage(), e);
+            log.error(e.getMessage());
         }
     }
 

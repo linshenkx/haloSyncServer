@@ -1,4 +1,3 @@
-HELP.md
 .gradle
 build/
 !gradle/wrapper/gradle-wrapper.jar
@@ -35,3 +34,5 @@ out/
 
 ### VS Code ###
 .vscode/
+/config/
+/logs/

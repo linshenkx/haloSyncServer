@@ -1,0 +1,39 @@
+server:
+  port: ${HALO_SYNC_SERVER_PORT:12996}
+halo-sync:
+  halo:
+    url: ${HALO_URL:https://linshenkx.cn}
+    username: ${HALO_USERNAME:123456@qq.com}
+    password: ${HALO_PASSWORD:123456}
+  hexo:
+    git:
+      is-private: ${HEXO_GIT_IS_PRIVATE:true}
+      url: ${HEXO_GIT_URL:https://github.com/you/blog.git}
+      username: ${HEXO_GIT_USERNAME:PRIVATE-TOKEN}
+      password: ${HEXO_GIT_PASSWORD:your-token}
+      branch: ${HEXO_GIT_BRANCH:refs/heads/master}
+      source-dir: ${HEXO_GIT_SOURCE_DIR:source/_posts}
+      init: ${HEXO_GIT_INIT:true}  # 是否将之前git上的文章补全到halo上
+logging:
+  logback:
+    rollingpolicy:
+      # 保留天数
+      max-history: 7
+      # 日志文件大小，超过则存档
+      max-file-size: 10MB
+      # 总日志大小
+      total-size-cap: 100MB
+      # 启动时清理日志
+      clean-history-on-start: true
+  file:
+    path: ./logs
+  level:
+    # feign日志以什么级别监控哪个接口
+    cn.linshenkx.halosyncserver.httpclient.HaloHttpClient: info
+feign:
+  client:
+    config:
+      halo:
+        connectTimeout: 60000
+        readTimeout: 60000
+        loggerLevel: full

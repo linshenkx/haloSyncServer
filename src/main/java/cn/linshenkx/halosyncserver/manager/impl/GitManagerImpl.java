@@ -145,6 +145,7 @@ public class GitManagerImpl implements GitManager {
 //                    }
 //                })
                 .setCredentialsProvider(new UsernamePasswordCredentialsProvider(hexoGitProp.getUsername(), hexoGitProp.getPassword()))
+                .setTimeout(10)
                 .call();
     }
 
@@ -161,6 +162,7 @@ public class GitManagerImpl implements GitManager {
 //                    }
 //                })
                 .setCredentialsProvider(new UsernamePasswordCredentialsProvider(hexoGitProp.getUsername(), hexoGitProp.getPassword()))
+                .setTimeout(10)
                 .call();
     }
 
