@@ -13,7 +13,7 @@ halo-sync:
       password: ${HEXO_GIT_PASSWORD:your-token}
       branch: ${HEXO_GIT_BRANCH:refs/heads/master}
       source-dir: ${HEXO_GIT_SOURCE_DIR:source/_posts}
-      init: ${HEXO_GIT_INIT:true}  # 是否将之前git上的文章补全到halo上
+      init: ${HEXO_GIT_INIT:true}  # 第一次运行时有效，是否将hexo-git仓库上的文章补全到halo上
 logging:
   logback:
     rollingpolicy:

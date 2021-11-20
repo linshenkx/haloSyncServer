@@ -11,11 +11,11 @@ plugins {
     id 'idea'
     id 'maven-publish'
     id 'distribution'
+    id 'com.palantir.docker' version '0.30.0'
 }
 
 group = 'cn.linshenkx'
-version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '1.8'
+version = '1.0.0'
 
 configurations {
     developmentOnly
@@ -98,4 +98,28 @@ tasks.withType(JavaCompile) {
 
 test {
     useJUnitPlatform()
+}
+
+bootJar {
+}
+task unpack(type: Copy) {
+    dependsOn bootJar
+    from(zipTree(tasks.bootJar.outputs.files.singleFile))
+    into("build/dependency")
+}
+
+docker {
+    name "linshen/halo-sync-server"
+    tag "version","linshen/halo-sync-server:${project.version}"
+    tag "latest","linshen/halo-sync-server:latest"
+    dockerfile file('Dockerfile')
+    copySpec.from(tasks.unpack.outputs).into("dependency")
+    //构建前是否拉取最新基础镜像
+    pull true
+    //是否从头构建
+    noCache false
+}
+
+task buildLatestAndVersionImage() {
+    dependsOn dockerTag
 }
