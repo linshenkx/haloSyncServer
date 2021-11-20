@@ -5,7 +5,7 @@ Halo博客同步器，支持定时检测Hexo博客仓库并同步变化到Halo�
 目前支持Hexo。
 
 设计思想参考：
-https://linshenkx.github.io/my_blog_system_design/
+https://linshenkx.github.io/my-blog-system-design/
 或
 https://www.linshenkx.cn/archives/myblogsystemdesign
 
