@@ -1,11 +1,9 @@
 package cn.linshenkx.halosyncserver.httpclient;
 
-import cn.linshenkx.halosyncserver.model.AuthToken;
 import cn.linshenkx.halosyncserver.model.PageObject;
 import cn.linshenkx.halosyncserver.model.dto.post.BasePostDetailDTO;
 import cn.linshenkx.halosyncserver.model.dto.post.BasePostSimpleDTO;
 import cn.linshenkx.halosyncserver.model.enums.PostStatus;
-import cn.linshenkx.halosyncserver.model.params.LoginParam;
 import cn.linshenkx.halosyncserver.model.params.PostParam;
 import cn.linshenkx.halosyncserver.model.params.PostQuery;
 import cn.linshenkx.halosyncserver.model.support.BaseResponse;
@@ -22,10 +20,7 @@ import java.util.List;
 
 @FeignClient(name = "halo", url = "${halo-sync.halo.url}", configuration = FeignConfiguration.class)
 public interface HaloHttpClient {
-
-    @PostMapping("/api/admin/login")
-    BaseResponse<AuthToken> auth(@RequestBody LoginParam loginParam);
-
+    
     @GetMapping("/api/admin/posts/status/{status}")
     BaseResponse<PageObject<BasePostSimpleDTO>> pageByStatus(@PathVariable(name = "status") PostStatus status, @SpringQueryMap Pageable pageable, @RequestParam Boolean more);
 

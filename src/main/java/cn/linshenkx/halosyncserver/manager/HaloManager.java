@@ -6,9 +6,7 @@ import cn.linshenkx.halosyncserver.model.dto.post.BasePostSimpleDTO;
 import java.util.List;
 
 public interface HaloManager {
-
-    String getLoginToken(boolean force);
-
+    
     List<BasePostSimpleDTO> getAllBasePostSimpleDTO();
 
     BasePostDetailDTO importMarkdown(String fileContent);

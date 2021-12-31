@@ -2,21 +2,17 @@ package cn.linshenkx.halosyncserver.manager.impl;
 
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.bean.copier.CopyOptions;
-import cn.hutool.core.date.DateTime;
 import cn.hutool.core.lang.Assert;
 import cn.linshenkx.halosyncserver.httpclient.HaloHttpClient;
 import cn.linshenkx.halosyncserver.manager.HaloManager;
-import cn.linshenkx.halosyncserver.model.AuthToken;
 import cn.linshenkx.halosyncserver.model.PageObject;
 import cn.linshenkx.halosyncserver.model.dto.post.BasePostDetailDTO;
 import cn.linshenkx.halosyncserver.model.dto.post.BasePostMinimalDTO;
 import cn.linshenkx.halosyncserver.model.dto.post.BasePostSimpleDTO;
 import cn.linshenkx.halosyncserver.model.enums.PostStatus;
-import cn.linshenkx.halosyncserver.model.params.LoginParam;
 import cn.linshenkx.halosyncserver.model.params.PostParam;
 import cn.linshenkx.halosyncserver.model.params.PostQuery;
 import cn.linshenkx.halosyncserver.model.vo.PostDetailVO;
-import cn.linshenkx.halosyncserver.prop.HaloGitProp;
 import cn.linshenkx.halosyncserver.utils.ByteMultipartFile;
 import cn.linshenkx.halosyncserver.utils.MarkdownUtils;
 import lombok.extern.slf4j.Slf4j;
@@ -33,28 +29,9 @@ import java.util.stream.Collectors;
 @Service
 public class HaloManagerImpl implements HaloManager {
 
-    @Resource
-    private HaloGitProp haloGitProp;
+
     @Resource
     private HaloHttpClient haloHttpClient;
-
-    private String token;
-    private Long tokenExpiredTime;
-
-
-    @Override
-    public String getLoginToken(boolean force) {
-        if (force || StringUtils.isBlank(token) || tokenExpiredTime < System.currentTimeMillis()) {
-            LoginParam loginParam = new LoginParam();
-            loginParam.setUsername(haloGitProp.getUsername());
-            loginParam.setPassword(haloGitProp.getPassword());
-            AuthToken auth = haloHttpClient.auth(loginParam).getData();
-            token = auth.getAccessToken();
-            tokenExpiredTime = System.currentTimeMillis() + (auth.getExpiredIn() - 60) * 1000L;
-            log.info("获取token成功，tokenExpiredTime为：{}", new DateTime(tokenExpiredTime));
-        }
-        return token;
-    }
 
     @Override
     public List<BasePostSimpleDTO> getAllBasePostSimpleDTO() {

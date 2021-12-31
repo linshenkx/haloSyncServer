@@ -1,6 +1,6 @@
 package cn.linshenkx.halosyncserver.httpclient;
 
-import cn.linshenkx.halosyncserver.manager.HaloManager;
+import cn.linshenkx.halosyncserver.manager.HaloAuthManager;
 import feign.Logger;
 import feign.RequestInterceptor;
 import feign.codec.ErrorDecoder;
@@ -11,7 +11,7 @@ import javax.annotation.Resource;
 public class FeignConfiguration {
 
     @Resource
-    private HaloManager haloManager;
+    private HaloAuthManager haloAuthManager;
 
     @Bean
     Logger.Level feignLoggerLevel() {
@@ -25,13 +25,13 @@ public class FeignConfiguration {
             if (template.path().startsWith("/api/admin/login")) {
                 return;
             }
-            template.header("ADMIN-Authorization", haloManager.getLoginToken(false));
+            template.header("ADMIN-Authorization", haloAuthManager.getLoginToken(false));
         };
     }
 
     @Bean
     public ErrorDecoder errorDecoder() {
-        return new HaloErrorDecoder(haloManager);
+        return new HaloErrorDecoder(haloAuthManager);
     }
 
 

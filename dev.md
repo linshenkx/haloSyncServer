@@ -17,6 +17,6 @@ dockerTag[具体tag任务名] 则是对指定tag进行操作
 # build（同时构造 latest和version 镜像）
 gradle dockerTag
 # push（同时推送 latest和version 镜像）
-gradle dockerTagPush
+gradle dockerTagsPush
 
 ```

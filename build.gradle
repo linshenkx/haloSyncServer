@@ -5,14 +5,15 @@ buildscript {
 }
 
 plugins {
-    id 'org.springframework.boot' version '2.5.6'
-    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
-    id 'java'
+    id 'org.springframework.boot' version '2.6.2'
     id 'idea'
     id 'maven-publish'
     id 'distribution'
-    id 'com.palantir.docker' version '0.30.0'
+    id 'com.palantir.docker' version '0.31.0'
 }
+
+apply plugin: 'java'
+apply plugin: 'io.spring.dependency-management'
 
 group = 'cn.linshenkx'
 version = '1.0.0'
@@ -34,7 +35,7 @@ repositories {
 }
 
 ext {
-    set('springCloudVersion', "2020.0.2")
+    set('springCloudVersion', "2021.0.0")
     flexmarkVersion = "0.62.2"
 }
 dependencyManagement {
@@ -52,8 +53,8 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
     implementation 'org.apache.commons:commons-lang3:3.12.0'
-    implementation 'cn.hutool:hutool-all:5.7.16'
-    implementation 'com.alibaba:fastjson:1.2.78'
+    implementation 'cn.hutool:hutool-all:5.7.18'
+    implementation 'com.alibaba:fastjson:1.2.79'
 
     implementation 'jakarta.validation:jakarta.validation-api:3.0.0'
     implementation 'org.hibernate:hibernate-validator:7.0.1.Final'
@@ -117,7 +118,7 @@ docker {
     //构建前是否拉取最新基础镜像
     pull true
     //是否从头构建
-    noCache false
+    noCache true
 }
 
 task buildLatestAndVersionImage() {

@@ -1,6 +1,6 @@
 package cn.linshenkx.halosyncserver.httpclient;
 
-import cn.linshenkx.halosyncserver.manager.HaloManager;
+import cn.linshenkx.halosyncserver.manager.HaloAuthManager;
 import com.alibaba.fastjson.JSON;
 import feign.Response;
 import feign.Util;
@@ -13,9 +13,9 @@ import java.nio.charset.StandardCharsets;
 @Slf4j
 public class HaloErrorDecoder implements ErrorDecoder {
 
-    private HaloManager haloManager;
+    private HaloAuthManager haloManager;
 
-    public HaloErrorDecoder(HaloManager haloManager) {
+    public HaloErrorDecoder(HaloAuthManager haloManager) {
         this.haloManager = haloManager;
     }
 
