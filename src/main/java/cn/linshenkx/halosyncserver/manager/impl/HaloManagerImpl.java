@@ -41,7 +41,7 @@ public class HaloManagerImpl implements HaloManager {
 
     @Override
     public BasePostDetailDTO importMarkdown(String fileContent) {
-        return haloHttpClient.backupMarkdowns(new ByteMultipartFile(MarkdownUtils.getTitle(fileContent), fileContent.getBytes(StandardCharsets.UTF_8))).getData();
+        return haloHttpClient.backupMarkdowns(new ByteMultipartFile(MarkdownUtils.getTitle(fileContent) + ".md", fileContent.getBytes(StandardCharsets.UTF_8))).getData();
     }
 
     @Override

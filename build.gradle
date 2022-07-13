@@ -16,7 +16,7 @@ apply plugin: 'java'
 apply plugin: 'io.spring.dependency-management'
 
 group = 'cn.linshenkx'
-version = '1.0.0'
+version = '1.0.1'
 
 configurations {
     developmentOnly
